@@ -134,6 +134,10 @@
 				>
 			</div>
 			<div class="stat-card">
+				<span class="stat-label">Light</span>
+				<span class="stat-value">{data?.light ?? '--'}</span>
+			</div>
+			<div class="stat-card">
 				<span class="stat-label">Sound</span>
 				<span class="stat-value" class:active={data?.sound_detect === 1}
 					>{data?.sound_detect === 1 ? 'Detected' : 'None'}</span
@@ -346,7 +350,7 @@
 	}
 
 	.header h1 {
-		font-size: 1.75rem;
+		font-size: 1.5rem;
 		font-weight: 700;
 		color: white;
 		margin: 0;
@@ -363,7 +367,7 @@
 		gap: 0.5rem;
 		padding: 0.5rem 1rem;
 		border-radius: 50px;
-		font-size: 0.875rem;
+		font-size: 0.8rem;
 		font-weight: 600;
 		background: rgba(59, 130, 246, 0.25);
 		color: #e0f2fe;
@@ -389,21 +393,9 @@
 
 	.stats-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(7, minmax(0, 1fr));
 		gap: 1rem;
 		margin-bottom: 1.5rem;
-	}
-
-	@media (min-width: 640px) {
-		.stats-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-
-	@media (min-width: 920px) {
-		.stats-grid {
-			grid-template-columns: repeat(6, 1fr);
-		}
 	}
 
 	.stat-card {
@@ -416,6 +408,9 @@
 		flex-direction: column;
 		gap: 0.5rem;
 		transition: background 0.5s ease, box-shadow 0.5s ease;
+		min-width: 0; /* allow grid to shrink without content forcing width */
+		align-items: center; /* center horizontally (flex column) */
+		text-align: center; /* center text */
 	}
 
 	.dashboard.light .stat-card {
@@ -423,7 +418,7 @@
 	}
 
 	.stat-label {
-		font-size: 0.75rem;
+		font-size: clamp(0.6rem, 1.1vw, 0.7rem);
 		color: rgba(190, 228, 255, 0.8);
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
@@ -435,10 +430,14 @@
 	}
 
 	.stat-value {
-		font-size: 1.5rem;
+		font-size: clamp(0.9rem, 2.2vw, 1.35rem);
 		font-weight: 700;
 		color: #f5f3ff;
 		transition: color 0.5s ease;
+		min-width: 0;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.dashboard.light .stat-value {
@@ -481,7 +480,7 @@
 	}
 
 	.vis-header h2 {
-		font-size: 1.125rem;
+		font-size: 1rem;
 		font-weight: 600;
 		color: white;
 		margin: 0;
@@ -495,7 +494,7 @@
 	.occupancy-tag {
 		padding: 0.375rem 0.875rem;
 		border-radius: 50px;
-		font-size: 0.8rem;
+		font-size: 0.75rem;
 		font-weight: 600;
 		background: rgba(244, 63, 94, 0.25);
 		color: #fff;

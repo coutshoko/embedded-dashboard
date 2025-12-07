@@ -18,7 +18,8 @@ export interface SensorData {
 	// New sound-related fields
 	sound_detect?: number;
 	sound_volt?: number;
-	lumen?: number;
+	// New ambient light (0/1)
+	light?: number;
 }
 
 export const sensorData = readable<SensorData | null>(null, (set) => {
