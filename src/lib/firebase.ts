@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, onValue } from 'firebase/database';
+import { getDatabase, ref, onValue, set } from 'firebase/database';
 import { readable } from 'svelte/store';
 
 const firebaseConfig = {
@@ -18,6 +18,7 @@ export interface SensorData {
 	// New sound-related fields
 	sound_detect?: number;
 	sound_volt?: number;
+	lumen?: number;
 }
 
 export const sensorData = readable<SensorData | null>(null, (set) => {
@@ -34,3 +35,8 @@ export const sensorData = readable<SensorData | null>(null, (set) => {
 		unsubscribe();
 	};
 });
+
+export const setLed = (status: number) => {
+	const ledRef = ref(database, 'sensor/led');
+	set(ledRef, status);
+};
