@@ -36,7 +36,7 @@
 		// 4. SOUND TOGGLE LOGIC: Toggle LED if sound > 100dB
 		if (sound_volt) {
 			const db = voltToDb(sound_volt);
-			if (db > 100 && !soundToggleCooldown) {
+			if (db > 95 && !soundToggleCooldown) {
 				setLed(led === 1 ? 0 : 1);
 				
 				// Set cooldown for 2 seconds to prevent flickering
@@ -53,7 +53,7 @@
 				vacantTimer = setTimeout(() => {
 					if (led === 1) setLed(0);
 					vacantTimer = null;
-				}, 1 * 60 *1000);
+				}, 5000);
 			}
 		} else {
 			// If not vacant, clear vacancy timer
@@ -69,7 +69,7 @@
 				sleepTimer = setTimeout(() => {
 					sleepMode = true;
 					if (led === 1) setLed(0);
-				}, 3 * 60 * 1000);
+				}, 5000);
 			}
 		} else {
 			// Reset sleep mode/timer if motion detected or vacant
@@ -93,7 +93,7 @@
 </script>
 
 <svelte:head>
-	<title>Smart Workspace</title>
+	<title>Smart Table</title>
 	<link
 		href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
 		rel="stylesheet"
@@ -104,7 +104,7 @@
 	<div class="content">
 		<!-- Header -->
 		<header class="header">
-			<h1>Smart Workspace</h1>
+			<h1>Smart 	Table<title>Smart </title></h1>
 			<div class="status-badge" class:connected={data}>
 				<span class="status-dot"></span>
 				{data ? 'Live' : 'Connecting...'}
